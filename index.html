@@ -1,0 +1,1146 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anamika's Space (@charachange) — Playlists &amp; Focus</title>
+
+  <!-- Tailwind CSS CDN with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Custom Design Tokens: Warm Matte Editorial Surface + Victorian 221B Sherlock Suite -->
+  <script id="tailwind-config">
+    /** @type {import('tailwindcss').Config} */
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'accent': '#8A5600',
+            'accent-hover': '#724700',
+            'accent-container': '#FDF4E7',
+            'on-accent': '#FFFFFF',
+            'border': '#D6D0C5',
+            'border-subtle': '#E4DFD6',
+            'border-sherlock': '#3E3832',
+            'sherlock-bg': '#161514',
+            'sherlock-card': '#211E1C',
+            'sherlock-card-border': '#332E2A',
+            'sherlock-text': '#EDE8E1',
+            'sherlock-text-muted': '#A89F91',
+            'sherlock-accent': '#E2AA54',
+            'light-primary': '#1A2530',
+            'light-on-primary': '#FFFFFF',
+            'light-primary-container': '#EBF1F5',
+            'light-on-primary-container': '#0E1821',
+            'light-secondary': '#434E59',
+            'light-on-secondary': '#FFFFFF',
+            'light-surface': '#FAF8F5',
+            'light-surface-container-low': '#F4F0EA',
+            'light-surface-container': '#EBE5DC',
+            'light-surface-container-high': '#E1DBD0',
+            'light-on-surface': '#1D1B18',
+            'light-on-surface-variant': '#5F5B54',
+            'light-outline': '#6E685F',
+            'light-outline-variant': '#D2CCC1',
+          },
+          borderRadius: {
+            'sm': '4px',
+            'DEFAULT': '8px',
+            'md': '12px',
+            'lg': '16px',
+            'full': '9999px',
+          },
+          fontFamily: {
+            'display': ['"EB Garamond"', 'Georgia', 'serif'],
+            'headline': ['"EB Garamond"', 'Georgia', 'serif'],
+            'title': ['"Commissioner"', 'system-ui', 'sans-serif'],
+            'body': ['"Commissioner"', 'system-ui', 'sans-serif'],
+            'label': ['"Commissioner"', 'system-ui', 'sans-serif'],
+            'mono': ['"Spline Sans Mono"', 'monospace'],
+          },
+          fontSize: {
+            'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.5px', fontWeight: '600' }],
+            'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '600' }],
+            'headline-xl': ['40px', { lineHeight: '48px', letterSpacing: '-0.25px', fontWeight: '600' }],
+            'headline-xl-mobile': ['28px', { lineHeight: '34px', fontWeight: '600' }],
+            'headline-lg': ['32px', { lineHeight: '38px', fontWeight: '600' }],
+            'headline-lg-mobile': ['24px', { lineHeight: '30px', fontWeight: '600' }],
+            'headline-md': ['24px', { lineHeight: '30px', fontWeight: '600' }],
+            'title-lg': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+            'title-md': ['16px', { lineHeight: '24px', fontWeight: '600' }],
+            'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+            'body-md': ['15px', { lineHeight: '23px', fontWeight: '400' }],
+            'body-sm': ['13px', { lineHeight: '19px', fontWeight: '400' }],
+            'label-lg': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+            'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.4px', fontWeight: '500' }],
+            'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.4px', fontWeight: '500' }],
+            'mono-sm': ['13px', { lineHeight: '18px', fontWeight: '500' }],
+            'mono-xs': ['11px', { lineHeight: '14px', fontWeight: '500' }],
+          },
+          transitionDuration: {
+            'state-change': '150ms',
+            'surface-enter': '250ms',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Google Fonts: EB Garamond, Commissioner, Spline Sans Mono & Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Commissioner:wght@300..700&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+
+  <style>
+    /* Optical alignment for Material Symbols icons */
+    .material-symbols-outlined {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+
+    /* Hide horizontal scrollbar on mobile filter strip while preserving swipe */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-light-surface text-light-on-surface font-body antialiased min-h-screen flex flex-col pb-20 md:pb-0 selection:bg-accent/20 selection:text-light-on-surface overflow-x-hidden">
+
+  <!-- =========================================================================
+       GLOBAL STICKY HEADER (Desktop Top Nav + Compact Mobile Brand Bar)
+  ========================================================================== -->
+  <header class="sticky top-0 z-40 bg-light-surface/95 backdrop-blur-md border-b border-border transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between gap-3">
+
+      <!-- Channel Brand Identity -->
+      <button
+        type="button"
+        onclick="switchView('playlists')"
+        class="flex items-center gap-3 group text-left rounded-lg p-1 -ml-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      >
+        <!-- Avatar with styled "AS" monogram fallback if external image expires -->
+        <div class="relative w-9 h-9 md:w-10 md:h-10 rounded-full border border-border group-hover:border-accent transition-colors overflow-hidden bg-gradient-to-br from-light-primary to-light-secondary flex items-center justify-center shrink-0">
+          <span class="font-headline text-title-md text-light-on-primary select-none" aria-hidden="true">AS</span>
+          <img
+            src="https://lh3.googleusercontent.com/aida/ALJJyrBzJvLr6y9NzYYauoWKGMibj_aRiejw_lzwp6yAChQ238J2-x5_GmpVz4-gKirHHb6OFFFw9tvUgHUtJcTPDcj1GNU2CtcRV7WXhpAfG15CIhPIOSpOMOPgijlERGVN9mOqu-eeBB5oUQAS4R565QThzFB3peQLGpLdXzACwj1a7g8UbGQGmhAn8dX9FmPT3T1UeklYeGvSw2nny_rycLFp8YGMnbwBKb-Cox1DWBFGQDtFO7Q0dZ9VDeRfCGHB"
+            alt="Anamika's Space Avatar"
+            class="absolute inset-0 w-full h-full object-cover"
+            onerror="this.style.display='none'"
+          >
+        </div>
+
+        <div class="flex flex-col min-w-0">
+          <span class="font-headline text-title-md md:text-title-lg tracking-tight leading-tight text-light-on-surface group-hover:text-accent transition-colors truncate">
+            Anamika's Space
+          </span>
+          <span class="font-mono text-mono-xs text-light-on-surface-variant flex items-center gap-1.5 mt-0.5">
+            <span>@charachange</span>
+            <span class="w-1 h-1 rounded-full bg-light-outline shrink-0"></span>
+            <span id="header-series-count" class="text-accent font-semibold truncate">13 Curated Series</span>
+          </span>
+        </div>
+      </button>
+
+      <!-- Desktop Navigation Tabs (Hidden on mobile; mobile uses fixed bottom dock) -->
+      <nav aria-label="Primary navigation" class="hidden md:flex items-center gap-2">
+        <button
+          type="button"
+          id="nav-desktop-playlists"
+          onclick="switchView('playlists')"
+          class="px-4 py-2 rounded-lg text-label-lg font-label transition-colors duration-state-change flex items-center gap-2"
+        >
+          <span class="material-symbols-outlined text-title-md">video_library</span>
+          <span>Playlists</span>
+        </button>
+        <button
+          type="button"
+          id="nav-desktop-concepts"
+          onclick="switchView('concepts')"
+          class="px-4 py-2 rounded-lg text-label-lg font-label transition-colors duration-state-change flex items-center gap-2"
+        >
+          <span class="material-symbols-outlined text-title-md">auto_stories</span>
+          <span>Concepts &amp; Notes</span>
+        </button>
+      </nav>
+
+      <!-- Direct YouTube Channel Action -->
+      <div class="flex items-center shrink-0">
+        <a
+          href="https://www.youtube.com/@charachange"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Anamika's Space YouTube Channel"
+          class="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-label-md font-label border border-border bg-light-surface-container-low sm:bg-light-surface text-light-on-surface hover:border-accent hover:text-accent transition-colors duration-state-change"
+        >
+          <span class="material-symbols-outlined text-title-md">smart_display</span>
+          <span class="hidden sm:inline">YouTube Channel</span>
+          <span class="hidden sm:inline material-symbols-outlined text-label-sm">open_in_new</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       VIEW 1: PLAYLISTS VIEW (Default Active View)
+  ========================================================================== -->
+  <main id="view-playlists" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 flex flex-col gap-10 md:gap-16">
+
+    <!-- Channel Statement / Hero Section -->
+    <section class="border-b border-border pb-6 md:pb-10">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-light-surface-container border border-border mb-3 md:mb-4 font-mono text-mono-xs text-light-on-surface-variant">
+          <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+          <span>Channel Archive • Updated weekly</span>
+        </div>
+        <h1 class="font-headline text-display-lg-mobile md:text-display-lg text-light-on-surface tracking-tight mb-3 md:mb-4 text-balance">
+          Deliberate keystrokes, classic literature, and contemplative storytelling.
+        </h1>
+        <p class="text-body-md md:text-body-lg text-light-on-surface-variant max-w-2xl leading-relaxed text-pretty">
+          A dedicated sanctuary exploring Arthur Conan Doyle’s works through rhythmic typewriter focus, alongside reflections on anime, global drama narratives, and quiet companion study.
+        </p>
+      </div>
+
+      <!-- 4-Item Responsive Metrics Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-border-subtle">
+        <div class="p-3 sm:p-4 bg-light-surface-container-low rounded-lg border border-border-subtle">
+          <div class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider mb-1">Total Playlists</div>
+          <div id="metric-total-playlists" class="font-mono text-title-lg sm:text-headline-md text-light-on-surface font-semibold">13</div>
+        </div>
+        <div class="p-3 sm:p-4 bg-light-surface-container-low rounded-lg border border-border-subtle">
+          <div class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider mb-1">Typing Episodes</div>
+          <div class="font-mono text-title-lg sm:text-headline-md text-light-on-surface font-semibold">24+ Parts</div>
+        </div>
+        <div class="p-3 sm:p-4 bg-light-surface-container-low rounded-lg border border-border-subtle">
+          <div class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider mb-1">Primary Literature</div>
+          <div class="font-mono text-body-md sm:text-title-md text-light-on-surface font-semibold truncate">A Study in Scarlet</div>
+        </div>
+        <div class="p-3 sm:p-4 bg-light-surface-container-low rounded-lg border border-border-subtle">
+          <div class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider mb-1">Pace &amp; Accuracy</div>
+          <div class="font-mono text-body-md sm:text-title-md text-accent font-semibold">24–36 WPM • 97%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: THE BAKER STREET TRANSCRIPTION DESK (Dark Victorian Sherlock Suite) -->
+    <section aria-labelledby="sherlock-heading">
+      <div class="rounded-xl border border-sherlock-card-border bg-sherlock-bg p-4 sm:p-6 md:p-8 relative overflow-hidden shadow-xl">
+        <!-- Subtle ambient brass-lamp glow -->
+        <div class="absolute -top-28 -right-28 w-72 sm:w-96 h-72 sm:h-96 bg-sherlock-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/3 w-56 sm:w-64 h-56 sm:h-64 bg-amber-950/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8 border-b border-sherlock-card-border pb-5 md:pb-6 relative z-10">
+          <div>
+            <div class="flex items-center flex-wrap gap-2 text-sherlock-accent font-mono text-mono-xs uppercase tracking-widest mb-2">
+              <span class="material-symbols-outlined text-label-lg">neurology</span>
+              <span>The Baker Street Transcription Desk</span>
+              <span class="text-sherlock-accent/85 font-medium">• 221B Focus</span>
+            </div>
+            <h2 id="sherlock-heading" class="font-headline text-headline-xl-mobile md:text-headline-xl text-sherlock-text tracking-tight">
+              Typing &amp; Literary Transcriptions
+            </h2>
+            <p class="text-body-sm md:text-body-md text-sherlock-text-muted mt-1.5 max-w-xl leading-relaxed">
+              A quiet, solitary hour tracing Arthur Conan Doyle’s prose keystroke by keystroke on TypeLit. No haste; simply Victorian narrative, companion rhythm, and deliberate keys.
+            </p>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sherlock-accent/15 border border-sherlock-accent/30 font-mono text-mono-xs text-sherlock-accent">
+              <span class="material-symbols-outlined text-label-sm">tune</span>
+              <span>Sherlock Mode Active</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Flagship Spotlight: A Study in Scarlet (Dynamically Populated) -->
+        <div id="sherlock-flagship-container" class="mb-6 md:mb-8 relative z-10"></div>
+
+        <!-- 3 Sherlock & Typing Sub-Playlists (Dynamically Populated) -->
+        <div id="sherlock-subgrid" class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CURATED CHANNEL PLAYLISTS (All 13 Playlists with Working Category Filters) -->
+    <section aria-labelledby="curated-playlists-heading">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider mb-1">
+            Complete Channel Index
+          </div>
+          <h2 id="curated-playlists-heading" class="font-headline text-headline-xl-mobile md:text-headline-xl text-light-on-surface tracking-tight">
+            Curated Channel Playlists
+          </h2>
+          <p class="text-body-sm md:text-body-md text-light-on-surface-variant mt-1 max-w-2xl">
+            All 13 channel playlists organized by theme—literary typing, anime philosophy, Asian dramas, gaming adventures, music, and insights.
+          </p>
+        </div>
+
+        <!-- Filter Pills: Horizontal touch-scroll on mobile, wrapped segmented bar on desktop -->
+        <div
+          id="playlist-filter-bar"
+          role="tablist"
+          aria-label="Filter channel playlists by category"
+          class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 md:flex-wrap md:overflow-visible lg:pb-0 lg:p-1 lg:bg-light-surface-container lg:rounded-lg lg:border lg:border-border -mx-4 px-4 sm:mx-0 sm:px-0 shrink-0"
+        ></div>
+      </div>
+
+      <!-- Dynamic Responsive Grid of All 13 Playlists -->
+      <div id="playlists-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+    </section>
+
+    <!-- Concepts & Notes Teaser Callout Banner -->
+    <section class="rounded-xl border border-border bg-light-surface-container p-5 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div class="max-w-2xl">
+        <span class="font-mono text-mono-xs text-accent uppercase tracking-wider mb-2 inline-flex items-center gap-1.5 font-semibold">
+          <span class="material-symbols-outlined text-label-sm">auto_stories</span>
+          <span>Dedicated Notebook</span>
+        </span>
+        <h3 class="font-headline text-headline-md text-light-on-surface mb-2">
+          Explore the Concepts &amp; Philosophical Notes
+        </h3>
+        <p class="text-body-sm md:text-body-md text-light-on-surface-variant leading-relaxed">
+          Drawn from video descriptions, typing reflections, and companion notes—ranging from the 221B transcription method to calming an overthinking mind.
+        </p>
+      </div>
+      <button
+        type="button"
+        onclick="switchView('concepts')"
+        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-light-primary text-light-on-primary font-label text-label-md md:text-label-lg font-semibold hover:bg-light-secondary transition-colors duration-state-change shrink-0"
+      >
+        <span>Enter Concepts &amp; Notes</span>
+        <span class="material-symbols-outlined text-title-md">arrow_forward</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       VIEW 2: CONCEPTS & NOTES VIEW (Editorial Notebook Layout)
+  ========================================================================== -->
+  <main id="view-concepts" class="hidden flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 flex flex-col gap-8 md:gap-12">
+
+    <!-- Editorial Header + Back to Playlists Button -->
+    <section class="border-b border-border pb-6 md:pb-8">
+      <div class="mb-5">
+        <button
+          type="button"
+          onclick="switchView('playlists')"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-border bg-light-surface-container-low text-label-md font-label text-light-on-surface-variant hover:text-light-on-surface hover:border-accent transition-colors duration-state-change"
+        >
+          <span class="material-symbols-outlined text-label-lg">arrow_back</span>
+          <span>Back to Playlists</span>
+        </button>
+      </div>
+
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-container border border-border mb-3 md:mb-4 font-mono text-mono-xs text-accent">
+          <span class="material-symbols-outlined text-label-sm">edit_note</span>
+          <span>Channel Philosophies &amp; Video Description Reflections</span>
+        </div>
+        <h1 class="font-headline text-display-lg-mobile md:text-display-lg text-light-on-surface tracking-tight mb-3 md:mb-4 text-balance">
+          Concepts &amp; Notes
+        </h1>
+        <p class="text-body-md md:text-body-lg text-light-on-surface-variant max-w-2xl leading-relaxed text-pretty">
+          The written notebook behind Anamika’s Space—gathering the quiet ideas behind deliberate keystrokes, timeless animated stories, calming audio, and unhurried study companionship.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4 Thoughtful Editorial Note Cards (Rendered from NOTES array) -->
+    <section aria-label="Editorial notes and channel philosophies">
+      <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"></div>
+    </section>
+
+    <!-- Bottom Return Banner -->
+    <section class="rounded-xl border border-border bg-light-surface-container-low p-5 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <span class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider block mb-1">Return to Channel Index</span>
+        <h3 class="font-headline text-headline-md text-light-on-surface">
+          Ready to explore the 13 curated playlists?
+        </h3>
+      </div>
+      <button
+        type="button"
+        onclick="switchView('playlists')"
+        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-light-primary text-light-on-primary font-label text-label-md font-semibold hover:bg-light-secondary transition-colors duration-state-change shrink-0"
+      >
+        <span class="material-symbols-outlined text-title-md">arrow_back</span>
+        <span>Back to Playlists</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+  ========================================================================== -->
+  <footer class="border-t border-border bg-light-surface-container-low py-8 mt-10 text-body-sm text-light-on-surface-variant">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-center sm:text-left">
+        <span class="font-headline text-title-md text-light-on-surface">Anamika's Space</span>
+        <span class="text-light-outline font-bold">•</span>
+        <span class="font-mono text-mono-xs">@charachange</span>
+        <span class="text-light-outline font-bold">•</span>
+        <span>A Study in Scarlet • TypeLit Transcriptions</span>
+      </div>
+      <div class="flex items-center gap-5 font-label text-label-md">
+        <button type="button" id="footer-nav-playlists" onclick="switchView('playlists')" class="hover:text-light-on-surface transition-colors">
+          Playlists
+        </button>
+        <button type="button" id="footer-nav-concepts" onclick="switchView('concepts')" class="hover:text-light-on-surface transition-colors">
+          Concepts &amp; Notes
+        </button>
+        <a
+          href="https://www.youtube.com/@charachange"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-accent transition-colors inline-flex items-center gap-1"
+        >
+          <span>YouTube</span>
+          <span class="material-symbols-outlined text-label-sm">open_in_new</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MOBILE FIXED BOTTOM NAVIGATION DOCK (Visible only below md breakpoint)
+  ========================================================================== -->
+  <nav aria-label="Mobile navigation" class="flex md:hidden fixed bottom-0 left-0 right-0 z-50 bg-light-surface/95 backdrop-blur-md border-t border-border px-4 py-2 items-center justify-around shadow-lg">
+    <button
+      type="button"
+      id="nav-mobile-playlists"
+      onclick="switchView('playlists')"
+      class="flex flex-col items-center justify-center gap-0.5 px-4 py-1.5 rounded-lg font-label text-label-sm transition-colors duration-state-change"
+    >
+      <span class="material-symbols-outlined text-title-md">video_library</span>
+      <span>Playlists</span>
+    </button>
+    <button
+      type="button"
+      id="nav-mobile-concepts"
+      onclick="switchView('concepts')"
+      class="flex flex-col items-center justify-center gap-0.5 px-4 py-1.5 rounded-lg font-label text-label-sm transition-colors duration-state-change"
+    >
+      <span class="material-symbols-outlined text-title-md">auto_stories</span>
+      <span>Concepts</span>
+    </button>
+    <a
+      href="https://www.youtube.com/@charachange"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex flex-col items-center justify-center gap-0.5 px-4 py-1.5 rounded-lg text-light-on-surface-variant hover:text-accent font-label text-label-sm transition-colors duration-state-change"
+    >
+      <span class="material-symbols-outlined text-title-md">smart_display</span>
+      <span>YouTube</span>
+    </a>
+  </nav>
+
+  <!-- =========================================================================
+       EASY-TO-EDIT CONTENT ARRAYS & APPLICATION SCRIPT
+  ========================================================================== -->
+  <script>
+    /**
+     * Ambient Baker Street study image for the Sherlock Spotlight.
+     * Automatically falls back to a styled dark Victorian gradient if unavailable.
+     */
+    const BAKER_STREET_IMAGE_URL =
+      'https://lh3.googleusercontent.com/aida/ALJJyrAzMk5WMtDeAidw97gtsCAgj7GOWA5Ax5JhDMgaHkZ0crGand9LvA50jJYJRW53abKlHS62SlcrpRxeLqaGrqZPl38kWhl6p0fXNJJiVHvR9Y15vVi16_s8tndXoars2dp1Hpz-6alTrHBvpxyiz0gZKLkXjihATsdvJ3XQ4UoMorSYPmcy_aW4j793-dzRuLmnfwNDed7n_JUQKF7upJx2V67yNUMacdIgqSRXgl1y635-eB5stYm0fc6ZZ0wdE00';
+
+    /**
+     * =========================================================================
+     * PLAYLISTS DATA (All 13 Direct, Clean YouTube Playlist Links)
+     * -------------------------------------------------------------------------
+     * Edit video counts, status labels, descriptions, or add new playlists
+     * directly here on GitHub—both the Baker Street section and Curated Grid
+     * update automatically.
+     * =========================================================================
+     */
+    const PLAYLISTS = [
+      // ---- TYPING & LITERARY TRANSCRIPTIONS (4) ----
+      {
+        id: 'study-in-scarlet',
+        title: 'A Study in Scarlet',
+        subtitle: 'Sir Arthur Conan Doyle • Full Playlist',
+        spotlightHeadline: 'Tracing Watson & Sherlock from Lauriston Gardens',
+        category: 'typing',
+        tag: 'Flagship Literature',
+        icon: 'menu_book',
+        count: '23 Videos',
+        cadence: 'Weekly',
+        latestPart: 'Part 23',
+        status: 'Updated weekly',
+        statusBadge: 'Active Series • Updated this week',
+        spotlightQuote:
+          '"There is a quiet precision in transcribing Conan Doyle keystroke by keystroke. Revisiting the conversation between Holmes and Constable John Rance from Chapter IV—tracing the deduction through deliberate, focused rhythm."',
+        description:
+          'Sir Arthur Conan Doyle’s debut Sherlock Holmes mystery transcribed chapter by chapter on TypeLit.io with steady, unhurried rhythm.',
+        url: 'https://www.youtube.com/playlist?list=PLUzpwLQdv8eY',
+        isFlagship: true,
+        isFresh: true,
+      },
+      {
+        id: 'touch-typing-daily',
+        title: 'Touch Typing (Daily Progress)',
+        category: 'typing',
+        tag: 'Practice Series',
+        icon: 'keyboard',
+        count: '12 Videos',
+        status: '2 days ago',
+        description:
+          'Real-time sessions tracking typing speed, finger positioning, and steady accuracy routines using Monkeytype and TypeLit.',
+        url: 'https://www.youtube.com/playlist?list=PLctol-KMBMtA',
+        isFresh: true,
+      },
+      {
+        id: 'modest-proposal',
+        title: 'Typing "A Modest Proposal"',
+        category: 'typing',
+        tag: 'Literary Satire',
+        icon: 'history_edu',
+        count: '8 Videos',
+        status: 'Bi-weekly',
+        description:
+          'Jonathan Swift’s classic satirical essay typed out in full real-time sessions. Contemplative pace with period background acoustics.',
+        url: 'https://www.youtube.com/playlist?list=PLKkBQUmjUZvU',
+        isFresh: false,
+      },
+      {
+        id: 'typing-with-me',
+        title: 'TYPING WITH ME',
+        category: 'typing',
+        tag: 'Companion Stream',
+        icon: 'headphones',
+        count: '15 Videos',
+        status: '5 days ago',
+        description:
+          'Lo-fi and focused unhurried companion sessions. Ideal for studying, reading, or quiet desk accompaniment.',
+        url: 'https://www.youtube.com/playlist?list=PLSlz8K7m_JGE',
+        isFresh: true,
+      },
+
+      // ---- ANIME & GAMES (3) ----
+      {
+        id: 'anime',
+        title: 'Anime',
+        category: 'anime',
+        tag: 'Anime Series',
+        icon: 'tv_gen',
+        count: '18 Videos',
+        status: 'Updated monthly',
+        description:
+          '"Contents targeted at children have more than enough moral values to motivate you." Lessons from Shugo Chara!, Fairy Tail, and Yona of the Dawn.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6aKYFLpz3l1Lp3D8Z6db_dx',
+        isFresh: true,
+      },
+      {
+        id: 'games-and-me',
+        title: 'games and me',
+        category: 'anime',
+        tag: 'Gaming',
+        icon: 'sports_esports',
+        count: '9 Videos',
+        status: 'Updated recently',
+        description:
+          'Casual gaming playthroughs, clutch runs in Sunset Bike Racing Level 5, and personal gaming adventures.',
+        url: 'https://www.youtube.com/playlist?list=PLPA3-urulYFo',
+        isFresh: true,
+      },
+      {
+        id: 'toram-online',
+        title: 'TORAM ONLINE RPG',
+        category: 'anime',
+        tag: 'MMORPG',
+        icon: 'swords',
+        count: '14 Videos',
+        status: 'Ongoing Archive',
+        description:
+          'Explorations, guild activities, skill trees, and gameplay moments inside the vast world of Toram Online.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6bMjElW7vqnAv9IrlgTVTT2',
+        isFresh: false,
+      },
+
+      // ---- DRAMAS (3) ----
+      {
+        id: 'kdrama',
+        title: 'KDRAMA',
+        category: 'drama',
+        tag: 'Korean Drama',
+        icon: 'movie',
+        count: '21 Videos',
+        status: 'Updated this month',
+        description:
+          'Curated highlights, emotional character arcs, and music moments across favorite Korean drama narratives.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6YQ2Yf_XRK64NKS4m5dZnXD',
+        isFresh: true,
+      },
+      {
+        id: 'cdrama',
+        title: 'CDRAMA',
+        category: 'drama',
+        tag: 'Chinese Drama',
+        icon: 'theaters',
+        count: '16 Videos',
+        status: 'Active Collection',
+        description:
+          'Historical sagas, xianxia adventures, and contemporary Chinese dramas explored through character development.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6aqv96Eya9nnOXsHD9HLvN_',
+        isFresh: false,
+      },
+      {
+        id: 'indian-series',
+        title: 'Indian series',
+        category: 'drama',
+        tag: 'Indian Drama',
+        icon: 'live_tv',
+        count: '11 Videos',
+        status: 'Regular additions',
+        description:
+          'Key moments, soundtrack analysis, and narrative breakdowns from compelling Indian television serials and web series.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6bzcG1G5lxECfJ-m2VH0Vqw',
+        isFresh: false,
+      },
+
+      // ---- MUSIC & INFO (3) ----
+      {
+        id: 'my-covers',
+        title: 'My covers',
+        category: 'creative',
+        tag: 'Vocal & Audio',
+        icon: 'mic',
+        count: '7 Videos',
+        status: 'Creative archive',
+        description:
+          'Acoustic and vocal interpretations of personal favorite tracks and devotional compositions.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6ZrWtPGJfhLpuQf_iL8Hw1I',
+        isFresh: false,
+      },
+      {
+        id: 'songs',
+        title: 'Songs',
+        category: 'creative',
+        tag: 'Music Playlist',
+        icon: 'queue_music',
+        count: '25 Videos',
+        status: 'Updated recently',
+        description:
+          'Devotional, energetic, and meditative audio collections that power typing focus and calm an overthinking mind.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6bEeGkcnTMdR0GuFr9G3DVa',
+        isFresh: true,
+      },
+      {
+        id: 'information-corner',
+        title: 'Anamika Information Corner',
+        category: 'creative',
+        tag: 'Insights',
+        icon: 'info',
+        count: '10 Videos',
+        status: 'Periodic updates',
+        description:
+          'Channel updates, life reflections, study setup recommendations, and community announcements.',
+        url: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6Y0zP_qrSpSESa2RZeY7Af3',
+        isFresh: false,
+      },
+    ];
+
+    /**
+     * =========================================================================
+     * NOTES DATA (View 2: Concepts & Notes Editorial Cards)
+     * -------------------------------------------------------------------------
+     * Add or edit essays, video description excerpts, and personal reflections
+     * right here anytime on GitHub.
+     * =========================================================================
+     */
+    const NOTES = [
+      {
+        id: '221b-method',
+        number: '01',
+        tag: 'Literary Transcription',
+        icon: 'menu_book',
+        title: 'The 221B Method: Deliberate Keystrokes Over Speed',
+        quote:
+          'No haste; simply Victorian narrative, companion rhythm, and deliberate keys tracing Sir Arthur Conan Doyle line by line.',
+        body:
+          'Typing classic literature on TypeLit.io is never a race for peak words per minute. Holding a calm 24–36 WPM at 97% accuracy turns A Study in Scarlet into an active reading ritual—giving every exchange between Holmes, Watson, and Constable Rance room to breathe while building steady muscle memory.',
+        linkLabel: 'Open A Study in Scarlet Playlist',
+        linkUrl: 'https://www.youtube.com/playlist?list=PLUzpwLQdv8eY',
+      },
+      {
+        id: 'calming-overthinking',
+        number: '02',
+        tag: 'Mindfulness & Audio',
+        icon: 'spa',
+        title: 'Calming an Overthinking Mind',
+        quote:
+          'Restless thoughts rarely respond to forced silence, yet they soften when given a gentle, rhythmic anchor.',
+        body:
+          'Pairing meditative and devotional music with the predictable cadence of touch typing gives an overactive mind somewhere grounded to settle. Instead of letting thoughts spiral, the combination of tactile keystrokes and familiar melodies gently guides attention back to the present page.',
+        linkLabel: 'Open Songs Playlist',
+        linkUrl: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6bEeGkcnTMdR0GuFr9G3DVa',
+      },
+      {
+        id: 'moral-weight-stories',
+        number: '03',
+        tag: 'Anime Reflection',
+        icon: 'tv_gen',
+        title: 'Moral Weight in "Children\'s" Stories',
+        quote:
+          'Contents targeted at children have more than enough moral values to motivate you.',
+        body:
+          'Some of the clearest lessons in courage, loyalty, and self-discovery arrive in stories often dismissed as light entertainment. Whether watching Amu embrace who she wants to become in Shugo Chara!, witnessing steadfast camaraderie in Fairy Tail, or following quiet resilience in Yona of the Dawn, honest storytelling speaks at any age.',
+        linkLabel: 'Open Anime Playlist',
+        linkUrl: 'https://www.youtube.com/playlist?list=PLYDs-GtjEj6aKYFLpz3l1Lp3D8Z6db_dx',
+      },
+      {
+        id: 'unhurried-accompaniment',
+        number: '04',
+        tag: 'Study & Global Storytelling',
+        icon: 'headphones',
+        title: 'Unhurried Desk Accompaniment',
+        quote:
+          'Quiet company at the desk—and thoughtful stories from across borders—turn solitary hours into restorative ones.',
+        body:
+          'Whether sitting beside a lo-fi TYPING WITH ME stream during late-night study or unwinding with deeply drawn character arcs across K-Dramas, C-Dramas, and Indian series, good companionship never demands noise. It simply shares space, rhythm, and human emotion without rushing you.',
+        linkLabel: 'Open TYPING WITH ME Playlist',
+        linkUrl: 'https://www.youtube.com/playlist?list=PLSlz8K7m_JGE',
+      },
+    ];
+
+    /**
+     * Category Filter Metadata for Section 2
+     */
+    const PLAYLIST_CATEGORIES = [
+      { id: 'all', label: 'All' },
+      { id: 'typing', label: 'Typing' },
+      { id: 'anime', label: 'Anime & Games' },
+      { id: 'drama', label: 'Dramas' },
+      { id: 'creative', label: 'Music & Info' },
+    ];
+
+    // Active Application State
+    let currentView = 'playlists';
+    let currentPlaylistFilter = 'all';
+
+    /**
+     * Escapes HTML characters safely before inserting text into templates
+     */
+    function escapeHtml(value) {
+      if (typeof value !== 'string') return '';
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /**
+     * Updates dynamic total counts in the header and hero metrics card
+     */
+    function renderCounts() {
+      const total = PLAYLISTS.length;
+      const headerEl = document.getElementById('header-series-count');
+      const metricEl = document.getElementById('metric-total-playlists');
+      if (headerEl) headerEl.textContent = `${total} Curated Series`;
+      if (metricEl) metricEl.textContent = `${total}`;
+    }
+
+    /**
+     * Renders Section 1: Baker Street Transcription Desk (Flagship + 3 Typing Sub-Playlists)
+     */
+    function renderSherlockSuite() {
+      const flagshipContainer = document.getElementById('sherlock-flagship-container');
+      const subgridContainer = document.getElementById('sherlock-subgrid');
+      if (!flagshipContainer || !subgridContainer) return;
+
+      const flagship = PLAYLISTS.find(p => p.isFlagship) || PLAYLISTS.find(p => p.category === 'typing');
+      const subPlaylists = PLAYLISTS.filter(p => p.category === 'typing' && p.id !== (flagship && flagship.id));
+
+      if (flagship) {
+        flagshipContainer.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
+            <!-- Ambient Victorian Study Preview with Dark Victorian Gradient Fallback -->
+            <div class="lg:col-span-5 relative rounded-lg overflow-hidden border border-sherlock-card-border group min-h-[230px] sm:min-h-[260px] bg-gradient-to-br from-[#2C241D] via-[#1C1815] to-[#110F0E]">
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center opacity-45 select-none pointer-events-none">
+                <span class="material-symbols-outlined text-5xl text-sherlock-accent mb-2">menu_book</span>
+                <span class="font-headline italic text-title-lg text-sherlock-text">221B Baker Street</span>
+                <span class="font-mono text-mono-xs text-sherlock-text-muted tracking-widest uppercase mt-1">Transcription Desk</span>
+              </div>
+
+              <img
+                src="${escapeHtml(BAKER_STREET_IMAGE_URL)}"
+                alt="Victorian Study at 221B Baker Street"
+                class="w-full h-56 sm:h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500 relative z-0"
+                onerror="this.style.display='none'"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-sherlock-bg via-sherlock-bg/50 to-transparent z-10"></div>
+
+              <div class="absolute bottom-4 left-4 right-4 z-20">
+                <span class="font-mono text-mono-xs px-2.5 py-0.5 rounded bg-sherlock-accent text-sherlock-bg uppercase tracking-wider font-bold mb-2 inline-block">
+                  Flagship Series
+                </span>
+                <h3 class="font-headline text-headline-md text-sherlock-text">${escapeHtml(flagship.title)}</h3>
+                <p class="font-mono text-mono-xs text-sherlock-text-muted mt-1">${escapeHtml(flagship.subtitle || '')}</p>
+              </div>
+            </div>
+
+            <!-- Flagship Description, Progression Stats & Direct Full Playlist CTA -->
+            <div class="lg:col-span-7 flex flex-col justify-between bg-sherlock-card p-5 sm:p-6 rounded-lg border border-sherlock-card-border">
+              <div>
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <span class="font-mono text-mono-xs text-sherlock-accent tracking-wider uppercase flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-label-sm">book</span>
+                    <span>Current Novel Progression</span>
+                  </span>
+                  <span class="font-mono text-mono-xs px-2.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 inline-flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span>${escapeHtml(flagship.statusBadge || 'Active Series • Updated this week')}</span>
+                  </span>
+                </div>
+
+                <h3 class="font-headline text-headline-lg-mobile sm:text-headline-lg text-sherlock-text mb-2">
+                  ${escapeHtml(flagship.spotlightHeadline || flagship.title)}
+                </h3>
+                <p class="text-body-sm sm:text-body-md text-sherlock-text-muted leading-relaxed mb-5">
+                  ${escapeHtml(flagship.spotlightQuote || flagship.description)}
+                </p>
+
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3 p-3 sm:p-3.5 rounded-lg bg-sherlock-bg/80 border border-sherlock-card-border mb-5 text-center font-mono">
+                  <div>
+                    <div class="text-mono-xs text-sherlock-text-muted">Total Videos</div>
+                    <div class="text-title-md sm:text-title-lg text-sherlock-text font-semibold mt-0.5">${escapeHtml(flagship.count)}</div>
+                  </div>
+                  <div>
+                    <div class="text-mono-xs text-sherlock-text-muted">Cadence</div>
+                    <div class="text-title-md sm:text-title-lg text-sherlock-accent font-semibold mt-0.5">${escapeHtml(flagship.cadence || 'Weekly')}</div>
+                  </div>
+                  <div>
+                    <div class="text-mono-xs text-sherlock-text-muted">Latest Part</div>
+                    <div class="text-title-md sm:text-title-lg text-emerald-400 font-semibold mt-0.5">${escapeHtml(flagship.latestPart || 'Part 23')}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-sherlock-card-border">
+                <div class="flex items-center gap-2 text-sherlock-text-muted text-mono-xs font-mono">
+                  <span class="material-symbols-outlined text-title-md text-sherlock-accent">keyboard</span>
+                  <span>TypeLit.io Practice Session</span>
+                </div>
+                <a
+                  href="${escapeHtml(flagship.url)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-sherlock-accent text-light-primary font-label text-label-md font-bold hover:brightness-110 transition-all duration-state-change"
+                >
+                  <span class="material-symbols-outlined text-title-md">playlist_play</span>
+                  <span>Open Full Sherlock Playlist</span>
+                  <span class="material-symbols-outlined text-label-sm">arrow_outward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      subgridContainer.innerHTML = subPlaylists.map(item => `
+        <article class="rounded-lg border border-sherlock-card-border bg-sherlock-card/85 p-4 sm:p-5 flex flex-col justify-between hover:border-sherlock-accent/60 transition-all duration-state-change">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-mono-xs text-sherlock-accent uppercase tracking-wider">${escapeHtml(item.tag)}</span>
+              <span class="font-mono text-mono-xs px-2 py-0.5 rounded bg-sherlock-bg text-sherlock-text border border-sherlock-card-border shrink-0">
+                ${escapeHtml(item.count)}
+              </span>
+            </div>
+            <h4 class="font-headline text-title-lg text-sherlock-text mb-2">${escapeHtml(item.title)}</h4>
+            <p class="text-body-sm text-sherlock-text-muted leading-relaxed mb-4">
+              ${escapeHtml(item.description)}
+            </p>
+          </div>
+          <div class="pt-3 border-t border-sherlock-card-border flex items-center justify-between gap-2 text-mono-xs font-mono">
+            <span class="text-sherlock-text-muted flex items-center gap-1">
+              <span class="material-symbols-outlined text-label-sm text-sherlock-accent">history</span>
+              <span>${escapeHtml(item.status)}</span>
+            </span>
+            <a
+              href="${escapeHtml(item.url)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sherlock-accent hover:underline inline-flex items-center gap-1 font-medium py-1 shrink-0"
+            >
+              <span>View Playlist</span>
+              <span class="material-symbols-outlined text-label-sm">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /**
+     * Renders Section 2: Category Filter Pills with live counts
+     */
+    function renderPlaylistFilters() {
+      const bar = document.getElementById('playlist-filter-bar');
+      if (!bar) return;
+
+      bar.innerHTML = PLAYLIST_CATEGORIES.map(cat => {
+        const count = cat.id === 'all'
+          ? PLAYLISTS.length
+          : PLAYLISTS.filter(p => p.category === cat.id).length;
+        const isActive = currentPlaylistFilter === cat.id;
+
+        const activeClasses = 'bg-light-primary text-light-on-primary font-medium shadow-sm';
+        const idleClasses = 'bg-light-surface-container lg:bg-transparent text-light-on-surface-variant hover:text-light-on-surface hover:bg-light-surface-container-high lg:hover:bg-light-surface-container-low';
+
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            onclick="filterPlaylists('${cat.id}')"
+            class="shrink-0 px-3.5 py-2 lg:py-1.5 rounded-full lg:rounded-md font-label text-label-md transition-colors duration-state-change ${isActive ? activeClasses : idleClasses}"
+          >
+            ${escapeHtml(cat.label)} (${count})
+          </button>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renders Section 2: Dynamic Grid of ALL 13 Playlists
+     */
+    function renderPlaylistsGrid() {
+      const grid = document.getElementById('playlists-grid');
+      if (!grid) return;
+
+      const items = currentPlaylistFilter === 'all'
+        ? PLAYLISTS
+        : PLAYLISTS.filter(p => p.category === currentPlaylistFilter);
+
+      grid.innerHTML = items.map(item => {
+        const isTyping = item.category === 'typing';
+        const statusIcon = item.isFresh
+          ? '<span class="material-symbols-outlined text-label-sm text-emerald-700">bolt</span>'
+          : '<span class="material-symbols-outlined text-label-sm">history</span>';
+        const deskBadge = isTyping
+          ? '<span class="inline-flex items-center px-2 py-0.5 rounded bg-sherlock-bg text-sherlock-accent font-mono text-[10px] uppercase tracking-wider">221B Desk</span>'
+          : '';
+
+        return `
+          <article
+            data-category="${escapeHtml(item.category)}"
+            class="rounded-lg border ${isTyping ? 'border-accent/35 bg-accent-container/35' : 'border-border-subtle bg-light-surface-container-low'} p-5 flex flex-col justify-between hover:border-accent hover:shadow-sm transition-all duration-state-change"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-mono-xs text-light-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-label-lg text-accent">${escapeHtml(item.icon)}</span>
+                  <span>${escapeHtml(item.tag)}</span>
+                </span>
+                <span class="font-mono text-mono-xs px-2 py-0.5 rounded bg-light-surface-container text-light-on-surface border border-border shrink-0">
+                  ${escapeHtml(item.count)}
+                </span>
+              </div>
+
+              <div class="flex items-center flex-wrap gap-2 mb-2">
+                <h3 class="font-headline text-title-lg text-light-on-surface">${escapeHtml(item.title)}</h3>
+                ${deskBadge}
+              </div>
+
+              <p class="text-body-sm text-light-on-surface-variant leading-relaxed mb-4">
+                ${escapeHtml(item.description)}
+              </p>
+            </div>
+
+            <div class="pt-3.5 border-t border-border-subtle flex items-center justify-between gap-2 text-mono-xs font-mono">
+              <span class="text-light-on-surface-variant flex items-center gap-1">
+                ${statusIcon}
+                <span>${escapeHtml(item.status)}</span>
+              </span>
+              <a
+                href="${escapeHtml(item.url)}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent hover:text-accent-hover hover:underline inline-flex items-center gap-1 font-label text-label-md font-medium py-1 shrink-0"
+              >
+                <span>View Playlist</span>
+                <span class="material-symbols-outlined text-label-sm">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Category Filter Click Handler
+     */
+    function filterPlaylists(categoryId) {
+      currentPlaylistFilter = categoryId;
+      renderPlaylistFilters();
+      renderPlaylistsGrid();
+    }
+
+    /**
+     * Renders View 2: Concepts & Notes Editorial Cards from NOTES array
+     */
+    function renderNotes() {
+      const grid = document.getElementById('notes-grid');
+      if (!grid) return;
+
+      grid.innerHTML = NOTES.map(note => `
+        <article class="rounded-xl border border-border-subtle bg-light-surface-container-low p-5 sm:p-6 md:p-7 flex flex-col justify-between gap-5 hover:border-border transition-colors duration-state-change">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="inline-flex items-center gap-1.5 font-mono text-mono-xs text-accent uppercase tracking-wider">
+                <span class="material-symbols-outlined text-label-lg">${escapeHtml(note.icon)}</span>
+                <span>${escapeHtml(note.tag)}</span>
+              </span>
+              <span class="font-mono text-mono-xs px-2 py-0.5 rounded bg-light-surface-container border border-border text-light-on-surface-variant">
+                Note ${escapeHtml(note.number)}
+              </span>
+            </div>
+
+            <h2 class="font-headline text-headline-md text-light-on-surface mb-3 leading-snug">
+              ${escapeHtml(note.title)}
+            </h2>
+
+            <blockquote class="border-l-2 border-accent pl-4 py-1.5 my-3.5 bg-light-surface/75 rounded-r-md">
+              <p class="font-headline italic text-body-lg text-light-on-surface leading-relaxed">
+                “${escapeHtml(note.quote)}”
+              </p>
+            </blockquote>
+
+            <p class="text-body-md text-light-on-surface-variant leading-relaxed">
+              ${escapeHtml(note.body)}
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-border-subtle flex items-center justify-between">
+            <a
+              href="${escapeHtml(note.linkUrl)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 font-label text-label-md text-accent hover:text-accent-hover hover:underline font-medium py-1"
+            >
+              <span class="material-symbols-outlined text-label-lg">playlist_play</span>
+              <span>${escapeHtml(note.linkLabel)}</span>
+              <span class="material-symbols-outlined text-label-sm">arrow_forward</span>
+            </a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    /**
+     * Switches cleanly between 'playlists' and 'concepts' views inside the single HTML file,
+     * keeping desktop top nav, mobile bottom dock, footer, and URL hash synchronized.
+     */
+    function switchView(viewName, options = { updateHash: true, scrollToTop: true }) {
+      const target = viewName === 'concepts' ? 'concepts' : 'playlists';
+      currentView = target;
+
+      const playlistsEl = document.getElementById('view-playlists');
+      const conceptsEl = document.getElementById('view-concepts');
+      if (playlistsEl && conceptsEl) {
+        playlistsEl.classList.toggle('hidden', target !== 'playlists');
+        conceptsEl.classList.toggle('hidden', target !== 'concepts');
+      }
+
+      // Sync Desktop Top Nav Active State
+      const dPlaylists = document.getElementById('nav-desktop-playlists');
+      const dConcepts = document.getElementById('nav-desktop-concepts');
+      const dActive = ['font-semibold', 'text-light-primary', 'bg-light-primary-container/70', 'border', 'border-light-outline-variant'];
+      const dIdle = ['text-light-on-surface-variant', 'hover:text-light-on-surface', 'hover:bg-light-surface-container-low', 'border', 'border-transparent'];
+
+      if (dPlaylists && dConcepts) {
+        dPlaylists.classList.remove(...dActive, ...dIdle);
+        dConcepts.classList.remove(...dActive, ...dIdle);
+        dPlaylists.classList.add(...(target === 'playlists' ? dActive : dIdle));
+        dConcepts.classList.add(...(target === 'concepts' ? dActive : dIdle));
+      }
+
+      // Sync Mobile Bottom Dock Active State
+      const mPlaylists = document.getElementById('nav-mobile-playlists');
+      const mConcepts = document.getElementById('nav-mobile-concepts');
+      const mActive = ['text-light-primary', 'font-semibold', 'bg-light-primary-container/60'];
+      const mIdle = ['text-light-on-surface-variant', 'hover:text-light-on-surface'];
+
+      if (mPlaylists && mConcepts) {
+        mPlaylists.classList.remove(...mActive, ...mIdle);
+        mConcepts.classList.remove(...mActive, ...mIdle);
+        mPlaylists.classList.add(...(target === 'playlists' ? mActive : mIdle));
+        mConcepts.classList.add(...(target === 'concepts' ? mActive : mIdle));
+      }
+
+      // Sync Footer Links
+      const fPlaylists = document.getElementById('footer-nav-playlists');
+      const fConcepts = document.getElementById('footer-nav-concepts');
+      if (fPlaylists && fConcepts) {
+        fPlaylists.classList.toggle('text-light-on-surface', target === 'playlists');
+        fPlaylists.classList.toggle('font-semibold', target === 'playlists');
+        fConcepts.classList.toggle('text-light-on-surface', target === 'concepts');
+        fConcepts.classList.toggle('font-semibold', target === 'concepts');
+      }
+
+      // Update URL hash safely for back/forward support
+      if (options.updateHash && window.location.hash !== `#${target}`) {
+        try {
+          history.pushState(null, '', `#${target}`);
+        } catch (err) {
+          window.location.hash = target;
+        }
+      }
+
+      if (options.scrollToTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    /**
+     * Initializes the page once the DOM is loaded
+     */
+    function initApp() {
+      try {
+        renderCounts();
+        renderSherlockSuite();
+        renderPlaylistFilters();
+        renderPlaylistsGrid();
+        renderNotes();
+
+        const initialHash = window.location.hash.replace('#', '').toLowerCase();
+        switchView(initialHash === 'concepts' ? 'concepts' : 'playlists', {
+          updateHash: false,
+          scrollToTop: false,
+        });
+
+        window.addEventListener('hashchange', () => {
+          const nextHash = window.location.hash.replace('#', '').toLowerCase();
+          switchView(nextHash === 'concepts' ? 'concepts' : 'playlists', {
+            updateHash: false,
+            scrollToTop: true,
+          });
+        });
+      } catch (error) {
+        console.error('Error initializing Anamika’s Space:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
+```
